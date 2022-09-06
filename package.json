@@ -23,7 +23,8 @@
   "homepage": "https://github.com/tkp12345/recycle---chart-#readme",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "recharts": "^2.1.13"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
