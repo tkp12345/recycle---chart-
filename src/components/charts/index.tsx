@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import CicleChart from "./CircleChart";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
-import { Container } from './Charts.styled';
+import {Container, Contents, Footer, Footer_Li, Header} from './Charts.styled';
 import {ChartType} from "./utills/utills";
 
 interface PropType{
@@ -34,32 +34,40 @@ const Charts = ({mode,footer=false}:PropType) => {
     const renderfooterDataFilter = (): JSX.Element[]=>{
         const footerText = CONST_MENU.map((v:any)=>{
             return (
-                <li onClick={()=>setTitle(v.name)} key={v.id} >
+                <Footer_Li onClick={()=>setTitle(v.name)} key={v.id} >
                     {v.name}
-                </li>
+                </Footer_Li>
             )
         })
         return footerText;
     };
 
     return (
+        <div>
         <Container>
-            {/*header*/}
-            {`${title} 사용 현황`}
-            {/*contents*/}
-            {mode === ChartType.CIRCLE &&
-            <CicleChart/>
-            }
-            {mode === ChartType.LINE &&
-            <LineChart/>
-            }
-            {mode === ChartType.BAR &&
-            <BarChart/>
-            }
-            {/*footer*/}
-            {footer && renderfooterDataFilter()}
+
+            <Header>
+                {`${title} 사용 현황`}
+            </Header>
+
+            <Contents>
+                {mode === ChartType.CIRCLE &&
+                <CicleChart/>
+                }
+                {mode === ChartType.LINE &&
+                <LineChart/>
+                }
+                {mode === ChartType.BAR &&
+                <BarChart/>
+                }
+            </Contents>
+
+            <Footer>
+             {footer && renderfooterDataFilter()}
+            </Footer>
 
         </Container>
+        </div>
     );
 };
 
