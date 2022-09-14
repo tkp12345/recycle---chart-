@@ -4,16 +4,19 @@ import LineChart from "./LineChart";
 import BarChart from "./BarChart";
 import {Container, Contents, Footer, Footer_Li, Header} from './Charts.styled';
 import {ChartType} from "./utills/utills";
-
-interface PropType{
-    mode : string;
+interface PropType {
+    mode: string;
     footer: boolean;
+    tabMenu?: any;
+    setTabMenu?:React.Dispatch<React.SetStateAction<(string)[]>>;
 }
+
 
 type MENU_OBJECT ={
     id:number,
     name:string,
 }
+
 const CONST_MENU :Array<MENU_OBJECT>=[
     {id:0,name:'사용자별'},
     {id:1,name:'자원별'},
@@ -28,7 +31,7 @@ const CONST_MENU :Array<MENU_OBJECT>=[
  * @param mode
  * @constructor
  ********************************************************************/
-const Charts = ({mode,footer=false}:PropType) => {
+const Charts = ({mode,footer=false,tabMenu,setTabMenu=()=>{}}:PropType) => {
     const [title,setTitle] =useState<string|null>(CONST_MENU[0]?CONST_MENU[0].name:null);
 
     const renderfooterDataFilter = (): JSX.Element[]=>{
@@ -42,12 +45,15 @@ const Charts = ({mode,footer=false}:PropType) => {
         return footerText;
     };
 
+
+
     return (
         <div>
         <Container>
 
             <Header>
                 {`${title} 사용 현황`}
+                <button onClick={()=>setTabMenu([...tabMenu,title])}>최소화</button>
             </Header>
 
             <Contents>
