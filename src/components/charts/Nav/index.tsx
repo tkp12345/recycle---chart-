@@ -4,18 +4,31 @@ import {Footer_Li} from "../Charts.styled";
 
 interface propType{
     tabMenu? :any;
+    chartData?:any;
+    setChartData?:any;
 }
-const Nav = ({tabMenu}:propType) => {
 
- console.log('tabMenu:',tabMenu)
+const Nav = ({tabMenu,chartData,setChartData=()=>{}}:propType) => {
+    const onClickNavItem = (data:any)=>{
+        let newState = [...chartData];
+        const findIndex = chartData.findIndex((chart:any)=>chart.id === data.id);
+        newState[findIndex].isShow=true;
+        setChartData(newState)
+    }
+
     return (
         <Nav_Wrraper>
-            {tabMenu.map((menu:string, index:number)=>{
+            {tabMenu.map((menu:any, index:number)=>{
                 return(
-                  <Nav_menu key={index}>
-                      {menu}
+                    <>
+                    {!menu.isShow &&
+                  <Nav_menu onClick={()=>onClickNavItem(menu)} key={index}>
+                      {menu.name}
                 </Nav_menu>
-                )})}
+             }
+             </>
+            )})}
+
         </Nav_Wrraper>
     );
 };
